@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -12,6 +12,21 @@ const Menu = () => {
 
   const handleProfileClick = (index) => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "https://zerodha-backend-e1fx.onrender.com/api/auth/logout",
+        {},
+        { withCredentials: true },
+      );
+
+      window.location.href =
+        "https://zerodha-frontend-dzxz.onrender.com/signup";
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
   };
 
   const menuClass = "menu";
@@ -94,6 +109,14 @@ const Menu = () => {
           <div className="avatar">ZU</div>
           <p className="username">USERID</p>
         </div>
+
+        {isProfileDropdownOpen && (
+          <div className="profile-dropdown">
+            <p className="logout-option" onClick={handleLogout}>
+              Logout
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

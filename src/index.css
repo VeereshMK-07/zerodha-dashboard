@@ -301,6 +301,7 @@ hr {
   align-items: center;   /* keep */
   gap: 8px;              /* better than space-evenly */
   margin-left: 20px;
+  position: relative;
 }
 
 .profile .avatar {
@@ -842,4 +843,30 @@ hr {
 
 .action:hover {
   background-color: rgb(212, 212, 212);
+}
+
+/* Profile Dropdown */
+
+.profile-dropdown {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  width: 120px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.logout-option {
+  cursor: pointer;
+  color: #f6465d;
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+.logout-option:hover {
+  color: #c93b4c;
 }
