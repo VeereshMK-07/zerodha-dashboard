@@ -272,6 +272,7 @@ code {
 
 .menus ul {
   list-style-type: none;
+  display: flex;
 }
 
 .menus li {
