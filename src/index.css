@@ -268,11 +268,14 @@ code {
   display: flex;
   align-items: center;
   gap: 25px;
+  height: 100%;
 }
 
-.menus ul {
-  list-style-type: none;
+.menus {
   display: flex;
+  align-items: center;
+  gap: 25px;
+  height: 100%;
 }
 
 .menus li {
@@ -285,6 +288,7 @@ code {
   font-size: 0.8rem;
   font-weight: 400;
   color: rgb(70, 70, 70);
+  margin: 0;
 }
 
 .menu.selected {
@@ -299,11 +303,12 @@ hr {
 
 .profile {
   display: flex;
-  align-items: center;   /* keep */
-  gap: 10px;              /* better than space-evenly */
+  align-items: center;
+  gap: 10px;
   margin-left: 20px;
   cursor: pointer;
   position: relative;
+  height: 100%;
 }
 
 .avatar {
@@ -321,6 +326,7 @@ hr {
 .profile .username {
   font-size: 0.8rem;
   font-weight: 300;
+  margin: 0;
 }
 
 /* sudo selectors */
