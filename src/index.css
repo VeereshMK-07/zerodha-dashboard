@@ -299,27 +299,22 @@ hr {
 .profile {
   display: flex;
   align-items: center;   /* keep */
-  gap: 8px;              /* better than space-evenly */
+  gap: 10px;              /* better than space-evenly */
   margin-left: 20px;
+  cursor: pointer;
   position: relative;
 }
 
-.profile .avatar {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  position: relative;
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: rgb(221, 139, 221);
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  text-align: center;
+.avatar {
+  width: 35px;
+  height: 35px;
+  background: #f0e6ff;
+  color: #6c2bd9;
+  border-radius: 50%;
   display: flex;
-  background: rgb(252, 229, 252);
-  margin-right: 8px;
-  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .profile .username {
@@ -850,7 +845,7 @@ hr {
 .profile-dropdown {
   position: absolute;
   right: 20px;
-  top: 60px;
+  top: 70px;
   background: white;
   border: 1px solid #ddd;
   padding: 10px;
