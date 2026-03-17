@@ -1,13 +1,16 @@
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProtectedRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  if (!isLoggedIn) {
-    return <Navigate to="/signup" />;
-  }
+  useEffect(() => {
+    if (!isLoggedIn) {
+      window.location.href =
+        "https://zerodha-frontend-dzxz.onrender.com/signup";
+    }
+  }, [isLoggedIn]);
 
-  return children;
+  return isLoggedIn ? children : null;
 };
 
 export default ProtectedRoute;
