@@ -1,16 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      window.location.href =
-        "https://zerodha-frontend-dzxz.onrender.com/signup";
-    }
-  }, [isLoggedIn]);
+    const checkAuth = async () => {
+      try {
+        await axios.get(
+          "https://zerodha-backend-e1fx.onrender.com/api/auth/check-auth",
+          { withCredentials: true }
+        );
 
-  return isLoggedIn ? children : null;
+        setIsAuthenticated(true);
+      } catch (err) {
+        setIsAuthenticated(false);
+        window.location.href =
+          "https://zerodha-frontend-dzxz.onrender.com/signup";
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (isAuthenticated === null) return <h3>Loading...</h3>;
+
+  return isAuthenticated ? children : null;
 };
 
 export default ProtectedRoute;

@@ -13,25 +13,21 @@ const Menu = () => {
   const handleProfileClick = (index) => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
-const handleLogout = async () => {
-  try {
-    await axios.post(
-      "https://zerodha-backend-e1fx.onrender.com/api/auth/logout",
-      {},
-      { withCredentials: true },
-    );
-
-    // remove login flag
-    localStorage.removeItem("isLoggedIn");
-
-    // redirect to signup
-    window.location.href =
-      "https://zerodha-frontend-dzxz.onrender.com/signup";
-
-  } catch (err) {
-    console.error("Logout error:", err);
-  }
-};
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "https://zerodha-backend-e1fx.onrender.com/api/auth/logout",
+        {},
+        { withCredentials: true },
+      );
+      
+      // redirect to signup
+      window.location.href =
+        "https://zerodha-frontend-dzxz.onrender.com/signup";
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
 
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
