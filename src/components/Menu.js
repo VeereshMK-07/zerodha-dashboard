@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -13,20 +12,12 @@ const Menu = () => {
   const handleProfileClick = (index) => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
-  const handleLogout = async () => {
-    try {
-      await axios.post(
-        "https://zerodha-backend-e1fx.onrender.com/api/auth/logout",
-        {},
-        { withCredentials: true },
-      );
-      
-      // redirect to signup
-      window.location.href =
-        "https://zerodha-frontend-dzxz.onrender.com/signup";
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
+  const handleLogout = () => {
+    //  remove token
+    localStorage.removeItem("token");
+
+    //  redirect to signup
+    window.location.href = "https://zerodha-frontend-dzxz.onrender.com/signup";
   };
 
   const menuClass = "menu";
