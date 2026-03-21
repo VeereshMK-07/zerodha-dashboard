@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import{toast} from "react-toastify";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -30,10 +31,18 @@ const Menu = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+ const handleLogout = () => {
+  // remove token
+  localStorage.removeItem("token");
+
+  // show toast
+  toast.success("Logged out successfully 👋");
+
+  // delay redirect
+  setTimeout(() => {
     window.location.href = "https://zerodha-frontend-dzxz.onrender.com/signup";
-  };
+  }, 1500); // 1.5 sec
+};
 
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
