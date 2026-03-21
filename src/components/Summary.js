@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import SkeletonLoader from "./SkeletonLoader";
 
 const Summary = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // fake delay
+    }, 800);
+  }, []);
+
+  if (loading) {
+    return <SkeletonLoader />;
+  }
+
   return (
     <>
       <div className="username">

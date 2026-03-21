@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-// import { positions } from "../data/data";
+import SkeletonLoader from "./SkeletonLoader"; 
 
 const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    axios.get("https://zerodha-backend-e1fx.onrender.com/allPositions").then((res) => {
-      console.log(res.data);
-      setAllPositions(res.data);
-    });
+    axios.get("https://zerodha-backend-e1fx.onrender.com/allPositions")
+      .then((res) => {
+        console.log(res.data);
+        setAllPositions(res.data);
+        setLoading(false); 
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  // ✅ loader
+  if (loading) {
+    return <SkeletonLoader />;
+  }
 
   return (
     <>
