@@ -312,15 +312,15 @@ hr {
 }
 
 .avatar {
+  background: #6c63ff;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
   width: 35px;
   height: 35px;
-  background: #f0e6ff;
-  color: #6c2bd9;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
 }
 
 .profile .username {

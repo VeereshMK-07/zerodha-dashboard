@@ -1,27 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
+  //  NEW STATE FOR PHONE
+  const [phone, setPhone] = useState("");
+
+  // EXTRACT PHONE FROM TOKEN
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decoded = JSON.parse(atob(token.split(".")[1]));
+        setPhone(decoded.phone);
+      } catch (err) {
+        console.error("Invalid token");
+      }
+    }
+  }, []);
+
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
   };
 
-  const handleProfileClick = (index) => {
+  const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
-  const handleLogout = () => {
-    //  remove token
-    localStorage.removeItem("token");
 
-    //  redirect to signup
+  const handleLogout = () => {
+    localStorage.removeItem("token");
     window.location.href = "https://zerodha-frontend-dzxz.onrender.com/signup";
   };
 
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
+
+  //  MASK PHONE
+  const maskedPhone = phone ? "****" + phone.slice(-4) : "User";
+
+  // AVATAR LETTER
+  const avatarLetter = phone ? phone[0] : "U";
 
   return (
     <div className="menu-container">
@@ -95,10 +116,12 @@ const Menu = () => {
             </Link>
           </li>
         </ul>
+
         <hr />
+
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+          <div className="avatar">{avatarLetter}</div>
+          <p className="username">{maskedPhone}</p>
         </div>
 
         {isProfileDropdownOpen && (
