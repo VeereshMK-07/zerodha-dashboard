@@ -9,8 +9,8 @@ const ProtectedRoute = ({ children }) => {
       const token = localStorage.getItem("token");
 
       //Demo user
-      const DEMO_TOKEN = "demo-user"
-      if(token === DEMO_TOKEN) {
+    
+      if(token === "demo-user") {
         setIsAuth(true);
         return;
       }
