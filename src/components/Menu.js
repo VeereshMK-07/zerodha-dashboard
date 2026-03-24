@@ -14,6 +14,12 @@ const Menu = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
+    if(token === "demo-user") {
+      setUserName("Demo User");
+      setPhone("9999999999");
+      return;
+    }
+
     if (!token) return;
 
     axios

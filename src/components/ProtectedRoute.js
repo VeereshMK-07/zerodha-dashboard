@@ -8,6 +8,12 @@ const ProtectedRoute = ({ children }) => {
     const verifyUser = async () => {
       const token = localStorage.getItem("token");
 
+      //Demo user
+      if(token === "demo user") {
+        setIsAuth(true);
+        return;
+      }
+
       if (!token) {
         setIsAuth(false);
         return;
