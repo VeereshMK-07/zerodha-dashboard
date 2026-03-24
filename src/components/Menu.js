@@ -17,7 +17,7 @@ const Menu = () => {
     if (!token) return;
 
     axios
-      .get("https://zerodha-backend-e1fx.onrender.com/api/auth/verify-user", {
+      .get("https://zerodha-backend-e1fx.onrender.com/api/auth/verify", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
