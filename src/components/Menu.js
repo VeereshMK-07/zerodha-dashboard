@@ -10,7 +10,7 @@ const Menu = () => {
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
 
-  //  FETCH USER FROM BACKEND
+  // FETCH USER FROM BACKEND
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -53,11 +53,9 @@ const Menu = () => {
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
 
-  //  DISPLAY LOGIC
+  // DISPLAY LOGIC
   const displayName = userName || "User";
-  const avatarLetter = userName
-    ? userName.charAt(0).toUpperCase()
-    : "U";
+  const avatarLetter = userName ? userName.charAt(0).toUpperCase() : "U";
 
   return (
     <div className="menu-container">
@@ -66,7 +64,11 @@ const Menu = () => {
       <div className="menus">
         <ul>
           <li>
-            <Link to="/" onClick={() => handleMenuClick(0)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/"
+              onClick={() => handleMenuClick(0)}
+            >
               <p className={selectedMenu === 0 ? activeMenuClass : menuClass}>
                 Dashboard
               </p>
@@ -74,7 +76,11 @@ const Menu = () => {
           </li>
 
           <li>
-            <Link to="/orders" onClick={() => handleMenuClick(1)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/orders"
+              onClick={() => handleMenuClick(1)}
+            >
               <p className={selectedMenu === 1 ? activeMenuClass : menuClass}>
                 Orders
               </p>
@@ -82,7 +88,11 @@ const Menu = () => {
           </li>
 
           <li>
-            <Link to="/holdings" onClick={() => handleMenuClick(2)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/holdings"
+              onClick={() => handleMenuClick(2)}
+            >
               <p className={selectedMenu === 2 ? activeMenuClass : menuClass}>
                 Holdings
               </p>
@@ -90,7 +100,11 @@ const Menu = () => {
           </li>
 
           <li>
-            <Link to="/positions" onClick={() => handleMenuClick(3)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/positions"
+              onClick={() => handleMenuClick(3)}
+            >
               <p className={selectedMenu === 3 ? activeMenuClass : menuClass}>
                 Positions
               </p>
@@ -98,7 +112,11 @@ const Menu = () => {
           </li>
 
           <li>
-            <Link to="/funds" onClick={() => handleMenuClick(4)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/funds"
+              onClick={() => handleMenuClick(4)}
+            >
               <p className={selectedMenu === 4 ? activeMenuClass : menuClass}>
                 Funds
               </p>
@@ -106,7 +124,11 @@ const Menu = () => {
           </li>
 
           <li>
-            <Link to="/apps" onClick={() => handleMenuClick(6)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/apps"
+              onClick={() => handleMenuClick(6)}
+            >
               <p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
                 Apps
               </p>
