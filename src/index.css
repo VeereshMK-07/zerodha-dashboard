@@ -903,3 +903,16 @@ hr {
 .empty-btn:hover {
   background-color: #2f6bb2;
 }
+
+/* icon animation */
+.empty-state img {
+  width: 80px;
+  margin-bottom: 15px;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
