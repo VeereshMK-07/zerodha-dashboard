@@ -2,15 +2,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(null); // null = checking
+  const [isAuth, setIsAuth] = useState(null);
 
   useEffect(() => {
     const verifyUser = async () => {
+
+      // FIRST: check URL token
+      const params = new URLSearchParams(window.location.search);
+      const tokenFromURL = params.get("token");
+
+      if (tokenFromURL) {
+        localStorage.setItem("token", tokenFromURL);
+        window.history.replaceState({}, document.title, "/");
+      }
+
       const token = localStorage.getItem("token");
 
-      //Demo user
-    
-      if(token === "demo-user") {
+      // DEMO USER
+      if (token === "demo-user") {
         setIsAuth(true);
         return;
       }
@@ -40,17 +49,16 @@ const ProtectedRoute = ({ children }) => {
     verifyUser();
   }, []);
 
-  // ⏳ While checking
+  // ⏳ loading state
   if (isAuth === null) return <h2>Loading...</h2>;
 
-  // ❌ Not authenticated
+  // ❌ redirect only AFTER check completes
   if (!isAuth) {
     window.location.href =
       "https://zerodha-frontend-dzxz.onrender.com/signup";
     return null;
   }
 
-  // ✅ Authenticated
   return children;
 };
 
