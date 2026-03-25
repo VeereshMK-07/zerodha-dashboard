@@ -16,10 +16,21 @@ const Positions = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  // ✅ loader
+  // loader
   if (loading) {
     return <SkeletonLoader />;
   }
+
+   //  EMPTY STATE
+  if (allPositions.length === 0) {
+    return (
+      <div className="empty-state">
+        <h2>📉 No Positions Open</h2>
+        <p>Your active trades will appear here.</p>
+      </div>
+    );
+  }
+
 
   return (
     <>

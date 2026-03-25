@@ -24,6 +24,17 @@ const Holdings = () => {
     return <SkeletonLoader />;
   }
 
+   // EMPTY STATE
+  if (allHoldings.length === 0) {
+    return (
+      <div className="empty-state">
+        <h2>📊 No Holdings Yet</h2>
+        <p>Start investing to see your portfolio here.</p>
+        <button className="empty-btn">Explore Stocks</button>
+      </div>
+    );
+  }
+
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   const labels = allHoldings.map((subArray) => subArray["name"]);
 
