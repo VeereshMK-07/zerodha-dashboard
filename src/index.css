@@ -872,3 +872,34 @@ hr {
 .logout-option:hover {
   color: #c93b4c;
 }
+
+
+/* empty state */
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: #666;
+}
+
+.empty-state h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+.empty-btn {
+  padding: 10px 20px;
+  background-color: #387ed1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.empty-btn:hover {
+  background-color: #2f6bb2;
+}
