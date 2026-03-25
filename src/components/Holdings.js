@@ -24,21 +24,15 @@ const Holdings = () => {
     return <SkeletonLoader />;
   }
 
-  // EMPTY STATE
+   // EMPTY STATE
   if (allHoldings.length === 0) {
     return (
       <div className="empty-state">
         <h2>📊 You haven't invested yet</h2>
         <p>Buy your first stock to track your portfolio here.</p>
         <p className="hint">
-          💡Tip : Use the watchlist on the left to start trading 📈{" "}
-        </p>
-        <button
-          className="empty-btn"
-          onClick={() => (window.location.href = "/")}
-        >
-          Explore Stocks
-        </button>
+          💡Tip : Use the watchlist on the left to start trading 📈 </p>
+        <button className="empty-btn" onClick={() => window.location.href = "/"}>Explore Stocks</button>
       </div>
     );
   }
