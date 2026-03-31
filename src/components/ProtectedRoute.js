@@ -54,8 +54,9 @@ const ProtectedRoute = ({ children }) => {
 
   // ❌ redirect only AFTER check completes
   if (!isAuth) {
-    window.location.href =
-      "https://zerodha-frontend-dzxz.onrender.com/signup";
+    window.location.replace (
+      "https://zerodha-frontend-dzxz.onrender.com/signup"
+    );
     return null;
   }
 

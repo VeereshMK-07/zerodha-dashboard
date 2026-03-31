@@ -51,8 +51,9 @@ const Menu = () => {
     toast.success(`Bye ${userName || "User"} 👋`);
 
     setTimeout(() => {
-      window.location.href =
-        "https://zerodha-frontend-dzxz.onrender.com/signup";
+      window.location.replace (
+        "https://zerodha-frontend-dzxz.onrender.com/signup"
+      );
     }, 1500);
   };
 
