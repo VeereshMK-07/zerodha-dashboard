@@ -11,51 +11,59 @@ const Menu = () => {
   const [phone, setPhone] = useState("");
   const [loadingUser, setLoadingUser] = useState(true); 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+ useEffect(() => {
+  const token = localStorage.getItem("token");
 
-    //  DEMO USER 
-    if (token === "demo-user") {
-      setUserName("Demo User");
-      setPhone("9999999999");
+  //  DEMO USER
+  if (token === "demo-user") {
+    setUserName("Demo User");
+    setPhone("9999999999");
+    setLoadingUser(false);
+    return;
+  }
+
+  if (!token) {
+    setLoadingUser(false);
+    return;
+  }
+
+  // STEP 1: LOAD FROM LOCALSTORAGE FIRST
+  const savedName = localStorage.getItem("userName");
+  const savedPhone = localStorage.getItem("userPhone");
+
+  if (savedName) {
+    setUserName(savedName);
+  }
+
+  if (savedPhone) {
+    setPhone(savedPhone);
+  }
+
+  //  STEP 2: THEN UPDATE FROM API (background sync)
+  axios
+    .get("https://zerodha-backend-e1fx.onrender.com/api/auth/verify", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      const name = res.data.user.name || "User";
+      const phone = res.data.user.phone || "";
+
+      setUserName(name);
+      setPhone(phone);
+
+      //  UPDATE STORAGE
+      localStorage.setItem("userName", name);
+      localStorage.setItem("userPhone", phone);
+    })
+    .catch(() => {
+      console.error("User fetch failed");
+    })
+    .finally(() => {
       setLoadingUser(false);
-      return;
-    }
-
-    if (!token) {
-      setLoadingUser(false);
-      return;
-    }
-
-    //  LOAD FROM LOCALSTORAGE 
-    const savedName = localStorage.getItem("userName");
-    if (savedName) {
-      setUserName(savedName);
-    }
-
-    // 🔥 API CALL
-    axios
-      .get("https://zerodha-backend-e1fx.onrender.com/api/auth/verify", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        const name = res.data.user.name || "User";
-
-        setUserName(name);
-        setPhone(res.data.user.phone);
-
-        //  SAVE FOR NEXT LOAD
-        localStorage.setItem("userName", name);
-      })
-      .catch(() => {
-        console.error("User fetch failed");
-      })
-      .finally(() => {
-        setLoadingUser(false);
-      });
-  }, []);
+    });
+}, []);
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
