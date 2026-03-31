@@ -9,19 +9,31 @@ const Menu = () => {
 
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
+  const [loadingUser, setLoadingUser] = useState(true); 
 
-  // FETCH USER FROM BACKEND
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if(token === "demo-user") {
+    //  DEMO USER 
+    if (token === "demo-user") {
       setUserName("Demo User");
       setPhone("9999999999");
+      setLoadingUser(false);
       return;
     }
 
-    if (!token) return;
+    if (!token) {
+      setLoadingUser(false);
+      return;
+    }
 
+    //  LOAD FROM LOCALSTORAGE 
+    const savedName = localStorage.getItem("userName");
+    if (savedName) {
+      setUserName(savedName);
+    }
+
+    // 🔥 API CALL
     axios
       .get("https://zerodha-backend-e1fx.onrender.com/api/auth/verify", {
         headers: {
@@ -29,11 +41,19 @@ const Menu = () => {
         },
       })
       .then((res) => {
-        setUserName(res.data.user.name);
+        const name = res.data.user.name || "User";
+
+        setUserName(name);
         setPhone(res.data.user.phone);
+
+        //  SAVE FOR NEXT LOAD
+        localStorage.setItem("userName", name);
       })
       .catch(() => {
         console.error("User fetch failed");
+      })
+      .finally(() => {
+        setLoadingUser(false);
       });
   }, []);
 
@@ -47,11 +67,12 @@ const Menu = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName"); 
 
     toast.success(`Bye ${userName || "User"} 👋`);
 
     setTimeout(() => {
-      window.location.replace (
+      window.location.replace(
         "https://zerodha-frontend-dzxz.onrender.com/signup"
       );
     }, 1500);
@@ -60,9 +81,11 @@ const Menu = () => {
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
 
-  // DISPLAY LOGIC
   const displayName = userName || "User";
   const avatarLetter = userName ? userName.charAt(0).toUpperCase() : "U";
+
+ 
+  if (loadingUser) return null;
 
   return (
     <div className="menu-container">
@@ -145,7 +168,6 @@ const Menu = () => {
 
         <hr />
 
-        {/*  PROFILE */}
         <div className="profile" onClick={handleProfileClick}>
           <div className="avatar">{avatarLetter}</div>
           <p className="username">{displayName}</p>
